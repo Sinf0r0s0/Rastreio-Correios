@@ -23,7 +23,7 @@ def formata(lst):
             'DESCRICAO': ' '.join(lst[1].xpath('text()')[2].split())}
 
 
-def main(codigo):
+def rastreio(codigo):
     """Rastreio Correios
 
         Args:
@@ -38,4 +38,4 @@ def main(codigo):
 
 
 #  if __name__ == '__main__':
-#      print(main('LB192989285HK'))
+#      print(rastreio('LB192989285HK'))
