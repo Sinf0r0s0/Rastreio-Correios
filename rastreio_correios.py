@@ -12,15 +12,22 @@ def filter_local_label_tag(elem):
     label = elem.xpath('label')
     if label:
         return ' '.join(label[0].text.split())
-    return elem.xpath('text()[3]')[0].strip()
+    return elem.xpath('text()')[2].strip()
+
+
+def filter_descricao(elem):
+    try:
+        return ' '.join(elem.xpath('text()')[4].split())
+    except IndexError:
+        return ' '.join(elem.xpath('text()')[2].split())
 
 
 def formata(lst):
     return {'DATA': lst[0].text,
-            'HORA': lst[0].xpath('text()[2]')[0].strip(),
+            'HORA': lst[0].xpath('text()')[1].strip(),
             'LOCAL': filter_local_label_tag(lst[0]),
             'SITUACAO': lst[1].xpath('strong')[0].text,
-            'DESCRICAO': ' '.join(lst[1].xpath('text()')[2].split())}
+            'DESCRICAO': filter_descricao(lst[1])}
 
 
 def rastreio(codigo):
@@ -39,3 +46,4 @@ def rastreio(codigo):
 
 #  if __name__ == '__main__':
 #      print(rastreio('LB192989285HK'))
+
